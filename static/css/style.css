@@ -1,0 +1,262 @@
+/* Definição de Cores da Marca */
+:root {
+    --primary-color: #5d1a33; /* Vinho escuro do flyer */
+    --secondary-color: #d43f8d; /* Rosa/Magenta do logo */
+    --accent-color: #f3d4b3;   /* Tom de pele/dourado claro */
+    --dark-bg: #212529;         /* Cor escura do menu */
+    --light-text: #f8f9fa;      /* Texto claro */
+}
+
+body {
+    font-family: 'Poppins', sans-serif; 
+    background-color: #fdf8f5; 
+}
+
+/* --- Barra de Navegação --- */
+.navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    max-height: 50px;
+}
+
+.nav-link {
+    color: var(--light-text) !important;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* --- Botões --- */
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #b32a6f; 
+    border-color: #b32a6f;
+    transform: translateY(-2px);
+}
+
+/* --- Títulos e Textos --- */
+h1, h2, h3 {
+    color: var(--primary-color);
+}
+
+/* --- Cards de Serviço --- */
+.service-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(93, 26, 51, 0.1);
+}
+
+.service-card h4 {
+    color: var(--secondary-color);
+    margin-top: 1rem;
+}
+
+/* --- Formulários --- */
+.form-control:focus, .form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(212, 63, 141, 0.25);
+}
+
+/* --- Rodapé --- */
+footer {
+    background-color: var(--primary-color);
+}
+
+.footer-info a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+.footer-info a:hover {
+    text-decoration: underline;
+}
+
+/* ===================================== */
+/* --- ESTILOS ESPECÍFICOS PARA LOGIN (MODERNO E PROFISSIONAL) ---*/
+/* ===================================== */
+
+.login-page-body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Novo gradiente de fundo mais suave e rico */
+    background: linear-gradient(135deg, #4A142F 0%, #8C2E59 100%); /* Tons de vinho e rosa escuro */
+    background-image: url('../img/login_bg.jpeg'); /* Sua imagem de fundo, se preferir */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overlay com gradiente sutil sobre a imagem de fundo */
+.login-page-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(74, 20, 47, 0.85) 0%, rgba(140, 46, 89, 0.75) 100%);
+    z-index: 1;
+}
+
+.login-container {
+    position: relative;
+    z-index: 2;
+    max-width: 420px; /* Levemente mais estreito para focar */
+    width: 90%;
+    padding: 3rem; /* Mais espaçamento interno */
+    background-color: rgba(255, 255, 255, 0.08); /* Fundo sutilmente transparente e mais claro */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda mais discreta e elegante */
+    border-radius: 12px; /* Bordas mais arredondadas */
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Sombra mais pronunciada e suave */
+    backdrop-filter: blur(8px); /* Efeito de vidro fosco */
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.login-logo {
+    max-width: 70px; /* Logo um pouco menor para delicadeza */
+    margin-bottom: 1.8rem;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)); /* Sombra para realçar */
+}
+
+.login-welcome {
+    font-family: 'Open Sans', sans-serif; /* Fonte clean */
+    color: #e6e6e6; /* Cinza bem claro */
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.8px;
+    font-weight: 300; /* Mais leve */
+}
+
+.login-brand {
+    font-family: 'Playfair Display', serif;
+    color: #F8E7D4; /* Dourado mais suave, menos vibrante */
+    font-size: 2.3rem; /* Levemente menor */
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+.login-subtitle {
+    font-family: 'Open Sans', sans-serif;
+    color: #F8E7D4; /* Dourado suave */
+    font-size: 0.85rem;
+    letter-spacing: 1.5px; /* Mais espaçamento */
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+/* Estilo para os inputs (E-MAIL, SENHA) - CLASSE modern-input */
+.modern-input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 0.9rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    /* text-transform: uppercase; */ /* Você também pode comentar a linha assim */
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.modern-input::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Placeholder mais visível */
+}
+
+.modern-input:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #F8E7D4; /* Borda dourada ao focar */
+    box-shadow: 0 0 0 0.2rem rgba(248, 231, 212, 0.3); /* Sombra dourada suave */
+    color: #fff;
+}
+
+/* Estilo para o botão de ENTRAR - CLASSE modern-button */
+.modern-button {
+    background: linear-gradient(145deg, #F8E7D4, #D4A75E); /* Gradiente dourado suave */
+    border: none;
+    color: #5D1A33; /* Texto vinho escuro para contraste */
+    font-weight: 700;
+    padding: 0.9rem 3rem; /* Mais padding */
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1.8px; /* Mais espaçamento */
+    margin-top: 2rem; /* Mais margem superior */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra mais profunda */
+    transition: all 0.3s ease;
+}
+
+.modern-button:hover {
+    background: linear-gradient(145deg, #D4A75E, #F8E7D4); /* Inverter gradiente no hover */
+    transform: translateY(-3px); /* Efeito de levantar */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    color: #5D1A33;
+}
+
+/* Links de cadastro e voltar */
+.login-links p {
+    color: rgba(255, 255, 255, 0.8); /* Texto mais visível */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    font-weight: 300;
+}
+
+.login-links a {
+    color: #F8E7D4; /* Dourado suave */
+    text-decoration: none;
+    font-weight: 600; /* Mais forte */
+    transition: color 0.3s ease;
+}
+
+.login-links a:hover {
+    color: #fff; /* Branco no hover */
+    text-decoration: underline;
+}
+
+/* Estilo para alerts do Flask */
+.login-container .alert {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.15); /* Fundo de alerta mais transparente */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.login-container .alert .btn-close {
+    filter: invert(1); /* Fecha o botão em branco */
+    opacity: 0.7;
+}
+.login-container .alert-danger { background-color: rgba(220, 53, 69, 0.3); border-color: rgba(220, 53, 69, 0.5); }
+.login-container .alert-success { background-color: rgba(40, 167, 69, 0.3); border-color: rgba(40, 167, 69, 0.5); }
+.login-container .alert-warning { background-color: rgba(255, 193, 7, 0.3); border-color: rgba(255, 193, 7, 0.5); }

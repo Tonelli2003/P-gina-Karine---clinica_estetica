@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .hero-section {
+    background: linear-gradient(rgba(93, 26, 51, 0.7), rgba(93, 26, 51, 0.7)), url("{{ url_for('static', filename='img/flyer_bg.jpeg') }}");
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 0;
+    border-radius: 15px;
+    color: white;
+  }
+</style>
+
+<div class="text-center hero-section">
+  <h1 class="display-4" style="color: white; font-weight: 700;">Bem-vinda ao Centro Estético Karine Almeida</h1>
+  <p class="lead" style="color: var(--accent-color);">Sua beleza e bem-estar em primeiro lugar.</p>
+  <a href="/agendamento" class="btn btn-primary btn-lg mt-3">Agende sua Avaliação</a>
+</div>
+
+<div class="row mt-5 align-items-center">
+    <div class="col-md-6">
+        <h2>Sobre Nós</h2>
+        <p>No Centro Estético Karine Almeida, oferecemos os mais modernos tratamentos para realçar sua beleza natural com segurança e confiança. Nossa equipe é especializada e dedicada a proporcionar a melhor experiência, com atendimento personalizado e resultados que você vai amar.</p>
+    </div>
+    <div class="col-md-6 text-center">
+        <img src="{{ url_for('static', filename='img/clinica.jpeg') }}" class="img-fluid rounded-circle" style="max-width: 300px; border: 5px solid var(--accent-color);">
+    </div>
+</div>
+{% endblock %}

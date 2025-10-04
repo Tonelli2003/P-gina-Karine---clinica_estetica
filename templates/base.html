@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karine Almeida - Centro Estético</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='img/logo.jpg') }}" type="image/jpeg">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo Karine Almeida">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="/servicos">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="/agendamento">Agendamento</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contato">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-5 mb-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category or 'info' }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="text-light text-center py-4 mt-auto">
+    <div class="container footer-info">
+      <p class="mb-1"><strong>Karine Almeida - Centro Estético</strong></p>
+      <p class="mb-1">R. Prof. Izaura Bayerlein 28, Vila Monte Serrat, Cotia - SP</p>
+      <p class="mb-1">
+        WhatsApp: <a href="https://wa.me/5511978111919" target="_blank">(11) 97811-1919</a> | 
+        Instagram: <a href="https://instagram.com/esteticacotia_" target="_blank">@esteticacotia_</a>
+      </p>
+      <hr class="w-50 mx-auto" style="color: var(--accent-color);">
+      <div class="admin-login-link mb-2">
+        {% if 'user_id' in session %}
+          <a href="{{ url_for('listar_agendamentos') }}">Painel de Agendamentos</a> | 
+          <a href="{{ url_for('manage_users') }}">Gerenciar Usuários</a> | 
+          <a href="{{ url_for('logout') }}">Sair</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login do Administrador</a>
+        {% endif %}
+      </div>
+      <p class="mt-2 mb-0">© 2025 Karine Almeida - Todos os direitos reservados</p>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

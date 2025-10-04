@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-5">
+  <h1 class="display-3" style="color: green;">✅ Agendamento Confirmado!</h1>
+  <p class="lead">Seu horário foi reservado com sucesso.</p>
+  <div class="card w-75 mx-auto my-4">
+    <div class="card-body">
+      <h5 class="card-title">Detalhes do Agendamento</h5>
+      <p class="card-text">
+        <strong>Nome:</strong> {{ nome }} <br>
+        <strong>Tratamento:</strong> {{ tratamento }} <br>
+        <strong>Data:</strong> {{ data }} <br>
+        <strong>Horário:</strong> {{ horario }}
+      </p>
+      <p class="text-muted">Entraremos em contato pelo WhatsApp para confirmar. Até breve!</p>
+    </div>
+  </div>
+  <a href="/" class="btn btn-primary">Voltar para a Página Inicial</a>
+</div>
+{% endblock %}
