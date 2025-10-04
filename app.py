@@ -34,31 +34,6 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# --- ROTA DE INICIALIZAÇÃO DO BANCO (PARA USAR UMA ÚNICA VEZ) ---
-@app.route('/init-db')
-def init_db():
-    conn = get_db_connection()
-    if conn is None: return "Erro: Não foi possível conectar ao banco de dados."
-    cursor = conn.cursor()
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS agendamentos (
-        id SERIAL PRIMARY KEY, nome VARCHAR(100) NOT NULL, email VARCHAR(100) NOT NULL,
-        telefone VARCHAR(20), tratamento VARCHAR(100) NOT NULL, parte_corpo VARCHAR(100),
-        data DATE NOT NULL, horario TIME NOT NULL, criado_em TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-    );
-    """)
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS usuarios (
-        id SERIAL PRIMARY KEY, username VARCHAR(80) UNIQUE NOT NULL, email VARCHAR(120) UNIQUE NOT NULL,
-        password_hash VARCHAR(255) NOT NULL, is_active BOOLEAN NOT NULL DEFAULT FALSE,
-        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-    );
-    """)
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return "Tabelas 'agendamentos' e 'usuarios' criadas com sucesso!"
-
 # --- ROTAS DE AUTENTICAÇÃO ---
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -297,35 +272,6 @@ def delete_user(id):
     conn.close()
     flash('Usuário excluído com sucesso.', 'info')
     return redirect(url_for('manage_users'))
-
-# ### ROTA TEMPORÁRIA PARA ATUALIZAR O BANCO DE DADOS ###
-# Adiciona a coluna 'atendido'. É seguro rodar mais de uma vez.
-@app.route('/admin/update_db_schema')
-@login_required
-def update_db_schema():
-    conn = get_db_connection()
-    if conn is None:
-        flash("Erro de conexão com o banco de dados.", "danger")
-        return redirect(url_for('listar_agendamentos'))
-
-    message = "Nenhuma atualização necessária."
-    try:
-        cursor = conn.cursor()
-        cursor.execute("ALTER TABLE agendamentos ADD COLUMN atendido BOOLEAN NOT NULL DEFAULT FALSE;")
-        conn.commit()
-        message = "Banco de dados atualizado com sucesso: coluna 'atendido' foi adicionada."
-    except psycopg2.Error as e:
-        conn.rollback()
-        if e.pgcode == '42701':
-            message = "A coluna 'atendido' já existe. Nenhuma alteração necessária."
-        else:
-            message = f"Ocorreu um erro no banco de dados: {e}"
-    finally:
-        cursor.close()
-        conn.close()
-
-    flash(message, "info")
-    return redirect(url_for('listar_agendamentos'))
 
 if __name__ == "__main__":
     app.run(debug=True)
