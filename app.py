@@ -288,5 +288,35 @@ def delete_user(id):
     flash('Usuário excluído com sucesso.', 'info')
     return redirect(url_for('manage_users'))
 
+# ==========================================================
+# ROTA TEMPORÁRIA PARA ATIVAR O PRIMEIRO ADMIN
+# DEPOIS DE USAR, ESTA ROTA PODE (E DEVE) SER APAGADA
+# ==========================================================
+@app.route('/ativar-admin-secreto-xyz123/<string:email>')
+def ativar_primeiro_admin(email):
+    conn = get_db_connection()
+    if conn is None:
+        return "Erro de conexão com o banco de dados."
+
+    try:
+        cursor = conn.cursor()
+        # Executa o comando UPDATE para o email fornecido na URL
+        cursor.execute("UPDATE usuarios SET is_active = TRUE WHERE email = %s", (email,))
+        conn.commit()
+
+        # Verifica se alguma linha foi realmente alterada
+        if cursor.rowcount > 0:
+            flash(f"Usuário com o email '{email}' foi ativado com sucesso! Agora você pode fazer o login.", "success")
+        else:
+            flash(f"Nenhum usuário encontrado com o email '{email}'. Verifique se o email está correto.", "warning")
+
+    except Exception as e:
+        flash(f"Ocorreu um erro: {e}", "danger")
+    finally:
+        cursor.close()
+        conn.close()
+
+    return redirect(url_for('login'))
+
 if __name__ == "__main__":
     app.run(debug=True)
